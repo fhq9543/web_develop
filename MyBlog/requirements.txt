@@ -1,0 +1,7 @@
+PyMySQL==0.8.0
+Flask_SQLAlchemy==2.3.2
+alembic==0.9.7
+Flask_Migrate==2.1.1
+Flask_Script==2.0.6
+SQLAlchemy==1.1.11
+Flask==0.12.2

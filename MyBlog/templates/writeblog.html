@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}发表博客{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/writeblog.css') }}" type="text/css" media="screen" title="no title" charset="utf-8">
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title">发表博客</h3>
+    <form action="" method="POST" accept-charset="utf-8">
+        <div class="form-container">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入标题" name="title">
+            </div>
+            <div class="form-group">
+                <textarea name="content" class="form-control" placeholder="请输入内容" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">发表</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
