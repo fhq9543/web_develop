@@ -1,4 +1,4 @@
-.search{ width: 900px; margin: 5% auto 0 auto;}
+.search{ width: 900px; margin: 5% auto 0 auto; height: 100%; position: relative;}
 .form_div{ width: 100%; height: 40px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; margin-bottom: 25px;}
 .inp_text{ width: 80%; height: 40px; line-height: 40px; font-size: 16px; border:0px; text-indent: 1em; float: left;}
 .inp_sub{ width: 20%; height: 40px; line-height: 40px; font-size: 16px; border:0px; float: right;}
