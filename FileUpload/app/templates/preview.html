@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}文件详情{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/stylesheets/preview.css" />
+{% endblock %}
+
+{% block main %}
+    <div id="card" class="visible">
+        <div id="card-info">
+            <div class="file-icon">
+                <img alt="" src="/static/img/{{p.type}}.png"/>
+            </div>
+            <div class="file-meta">
+                <h2 id="filename" class="filename">{{p.filename}}</h2>
+                <span id="filesize"></span>
+                <span class="sep"> •</span>
+                <span id="uploadtime">{{p.uploadtime}} </span>
+            </div>
+            <div class="p-link">
+                <input id="link_s" name="" type="text" value="{{p.url_s}}"/>
+            </div>
+            <div id="action-area">
+                {% if p.type in ['pdf', 'image'] %}
+                    <a id="play-link" href="{{p.url_i}}">preview</a>
+                {% elif p.type != 'binary' %}
+                    <a id="play-link" href="{{p.url_i}}">play</a>
+                {% endif %}
+                <a id="download-link" href="{{p.url_d}}">download</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}-PasteFile</title>
+        <script type="text/javascript" src="/static/javascripts/jquery.min.js"></script>
+        <style type="text/css">
+        .lm_div{ position: absolute; left: 5%; top: 40%; width: 100px; z-index: 99999 }
+        .lm_div a{ text-decoration: none; display: block; width: 100%; height: 30px; margin: 20px auto; line-height: 30px; color: #fff; font-size: 20px; font-weight: bold; text-align: center; }
+        </style>
+        {% block head %}{% endblock %}
+    </head>
+    <body style=" margin: 0; padding: 0; overflow: hidden;  background: #63b6ae; ">
+    <div class="lm_div">
+        <a href="{{ url_for('main.index') }}">首页</a>
+        <a href="{{ url_for('main.upload') }}">文件上传</a>
+        <a href="{{ url_for('main.fileList') }}">文件列表</a>
+    </div>
+
+    <div style="width: 100%; height: 100%; position: absolute;">
+        {% block main %}{% endblock %}
+    </div>
+    </body>
+</html>
+

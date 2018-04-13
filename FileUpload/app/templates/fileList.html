@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}文件查找{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="/static/stylesheets/fileList.css" />
+{% endblock %}
+
+{% block main %}
+    <div class="search">
+		<h1 style="padding-left: 20px;">BROWSE</h1>
+		<div class="form_div">
+			<form action="" method="POST" accept-charset="utf-8">
+				<input class="inp_text" type="text" name="name" />
+				<input class="inp_sub" type="submit" value="Find!" />
+			</form>
+		</div>
+		<table>
+			<tr class="tr_bold">
+				<td class="td_32">文件名</td>
+				<td class="td_32">文件类型</td>
+				<td class="td_10">文件大小</td>
+				<td class="td_20">上传时间</td>
+				<td align="right" class="td_6">操作</td>
+			</tr>
+			{% for file in files %}
+				<tr>
+					<td class="td_32 file_name"><a href="{{ url_for('main.preview', filehash=file.filehash) }}">{{ file.filename }}</a></td>
+					<td class="td_32">{{ file.mimetype }}</td>
+					<td class="td_10">{{ file.size }}</td>
+					<td class="td_20">{{ file.uploadtime }}</td>
+					<td align="right" class="td_6"><a href="javascript:;" class="del">x</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+
+		<script type="text/javascript" src="/static/javascripts/fileList.js"></script>
+	</div>
+{% endblock %}
