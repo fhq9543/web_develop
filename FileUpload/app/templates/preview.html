@@ -22,9 +22,9 @@
             </div>
             <div id="action-area">
                 {% if p.type in ['pdf', 'image'] %}
-                    <a id="play-link" href="{{p.url_i}}">preview</a>
+                    <a id="play-link" href="{{p.url_i}}" target="_block">preview</a>
                 {% elif p.type != 'binary' %}
-                    <a id="play-link" href="{{p.url_i}}">play</a>
+                    <a id="play-link" href="{{p.url_i}}" target="_block">play</a>
                 {% endif %}
                 <a id="download-link" href="{{p.url_d}}">download</a>
             </div>

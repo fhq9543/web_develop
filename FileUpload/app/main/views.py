@@ -59,8 +59,6 @@ def fileList():
         filename = request.form.get('name')
         if filename:
             search = PasteFile.query.filter(PasteFile.filename.like('%s%%' % filename)).all()
-            print('%%%%%%%%%%')
-            print(search[0].filename)
         else:
             search = PasteFile.query.all()
         fields = ['filename', 'filehash', 'uploadtime', 'mimetype', 'size']
