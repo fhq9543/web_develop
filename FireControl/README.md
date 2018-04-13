@@ -1,4 +1,4 @@
-# FireConturl
+# FireControl
 消防设备管理系统
 
 ## 环境
