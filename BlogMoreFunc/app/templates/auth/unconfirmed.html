@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Blog - Confirm your account{% endblock %}
+{% block title %}确认邮箱{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
     <h1>
         Hello, {{ current_user.username }}!
     </h1>
-    <h3>You have not confirmed your account yet.</h3>
+    <h3>您还没有确认邮箱</h3>
     <p>
-        Before you can access this site you need to confirm your account.
-        Check your inbox, you should have received an email with a confirmation link.
+        在确认邮箱之前，您还不能进行操作。
+        点击下面链接，重新向您的邮箱发送验证。
     </p>
     <p>
-        Need another confirmation email?
-        <a href="{{ url_for('auth.resend_confirmation') }}">Click here</a>
+        重新发送验证？
+        <a href="{{ url_for('auth.resend_confirmation') }}">点击这里</a>
     </p>
 </div>
 {% endblock %}

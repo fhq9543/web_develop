@@ -58,7 +58,6 @@ def post(id):
 	                      author=current_user._get_current_object())
 	    db.session.add(comment)
 	    db.session.commit()
-	    flash('Your comment has been published.')
 	    return redirect(url_for('.post', id=post.id, page=-1))
 	page = request.args.get('page', 1, type=int)
 	if page == -1:
@@ -84,7 +83,7 @@ def edit(id):
         post.body = form.body.data
         db.session.add(post)
         db.session.commit()
-        flash('The post has been updated.')
+        flash('博客已更新')
         return redirect(url_for('.post', id=post.id))
     form.body.data = post.body
     return render_template('edit_post.html', form=form)
@@ -100,7 +99,7 @@ def edit_profile():
 		current_user.about_me = form.about_me.data
 		db.session.add(current_user)
 		db.session.commit()
-		flash('Your profile has been updated.')
+		flash('您的信息已更新')
 		return redirect(url_for('.user', username=current_user.username))
 	form.name.data = current_user.name
 	form.location.data = current_user.location
@@ -124,7 +123,7 @@ def edit_profile_admin(id):
 		user.about_me = form.about_me.data
 		db.session.add(user)
 		db.session.commit()
-		flash('The profile has been updated.')
+		flash('信息已更新')
 		return redirect(url_for('.user', username=user.username))
 	form.email.data = user.email
 	form.username.data = user.username
@@ -142,13 +141,13 @@ def edit_profile_admin(id):
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash('Invalid user.')
+        flash('无效的用户')
         return redirect(url_for('.index'))
     if current_user.is_following(user):
-        flash('You are already following this user.')
+        flash('您已经关注了此用户')
         return redirect(url_for('.user', username=username))
     current_user.follow(user)
-    flash('You are now following %s.' % username)
+    flash('您已关注 %s.' % username)
     return redirect(url_for('.user', username=username))
 
 
@@ -158,13 +157,13 @@ def follow(username):
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash('Invalid user.')
+        flash('无效的用户')
         return redirect(url_for('.index'))
     if not current_user.is_following(user):
-        flash('You are not following this user.')
+        flash('您还没有关注此用户')
         return redirect(url_for('.user', username=username))
     current_user.unfollow(user)
-    flash('You are not following %s anymore.' % username)
+    flash('您已取消了对 %s 的关注' % username)
     return redirect(url_for('.user', username=username))
 
 
@@ -172,7 +171,7 @@ def unfollow(username):
 def followers(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash('Invalid user.')
+        flash('无效的用户')
         return redirect(url_for('.index'))
     page = request.args.get('page', 1, type=int)
     pagination = user.followers.paginate(page, per_page=current_app.config['FOLLOWERS_PER_PAGE'], error_out=False)
@@ -186,7 +185,7 @@ def followers(username):
 def followed_by(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash('Invalid user.')
+        flash('无效的用户')
         return redirect(url_for('.index'))
     page = request.args.get('page', 1, type=int)
     pagination = user.followed.paginate(page, per_page=current_app.config['FOLLOWERS_PER_PAGE'], error_out=False)
@@ -231,3 +230,15 @@ def moderate_disable(id):
     db.session.commit()
     return redirect(url_for('.moderate',
                             page=request.args.get('page', 1, type=int)))
+
+
+@main.route('/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete(id):
+    post = Post.query.get_or_404(id)
+    if current_user != post.author and not current_user.can(Permission.ADMIN):
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('博客已删除')
+    return redirect(url_for('.index'))

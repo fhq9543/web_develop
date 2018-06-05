@@ -18,21 +18,21 @@
                 </a>
 
                 <div class="post-footer">
+                    <a href="{{ url_for('.post', id=post.id) }}#comments">
+                        <span >({{ post.comments.count() }})评论</span>
+                    </a>
                     {% if current_user == post.author %}
+                        &emsp;
                         <a href="{{ url_for('.edit', id=post.id) }}">
-                            <span class="label label-primary">Edit</span>
+                            <span >编辑</span>
                         </a>
                     {% elif current_user.is_administrator() %}
+                        &emsp;
                         <a href="{{ url_for('.edit', id=post.id) }}">
-                            <span class="label label-danger">Edit [Admin]</span>
+                            <span class="label label-danger">编辑 [Admin]</span>
                         </a>
                     {% endif %}
-                    <a href="{{ url_for('.post', id=post.id) }}#comments">
-                        <span class="label label-primary">{{ post.comments.count() }} Comments</span>
-                    </a>
                 </div>
-
-
             </div>
         </li>
     {% endfor %}
