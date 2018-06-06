@@ -68,7 +68,7 @@
                                 <span >编辑</span>
                             </a>
                             &emsp;
-                            <a href="{{ url_for('.delete', id=post.id) }}">
+                            <a href="{{ url_for('.delete', id=post.id, url=request.url) }}">
                                 <span >删除</span>
                             </a>
                         {% elif current_user.is_administrator() %}

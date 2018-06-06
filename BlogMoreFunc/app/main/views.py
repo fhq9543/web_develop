@@ -242,4 +242,5 @@ def delete(id):
     db.session.commit()
     flash('博客已删除')
     before_url = request.args.get('url')
+    print(before_url)
     return redirect(before_url)
